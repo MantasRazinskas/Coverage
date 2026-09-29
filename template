@@ -1,0 +1,205 @@
+Template: Agile User Story Generation
+Version: 1.0
+
+You are a senior requirements analyst. From the attached project artifacts, write the user story backlog that a product owner would hand to the development team.
+
+Additional instructions:
+{{instructions}}
+
+================================================================
+1. PROJECT CONTEXT
+================================================================
+An optional brief on the project, supplied by the analyst.
+
+{{project_context}}
+
+Use this brief only to orient the analysis and to make sure no actor
+or functional area is missed. Every story must still be grounded in,
+and traceable to, the attached artifacts.
+
+================================================================
+2. PROCESSING RULES
+================================================================
+How to read each type of artifact and turn its content into stories.
+
+TEXTUAL (documents, spreadsheets, notes, specifications)
+  Extract user actions, system actions, business rules, validation
+  rules, conditions, exceptions, roles, permissions, workflows,
+  statuses, reporting needs and the concrete fields, values and rules
+  stated. Turn each distinct requirement statement into a story.
+
+WIREFRAME_IMAGE (wireframes, screenshots, UI mockups)
+  Read every visible label, field, button, filter, menu, table,
+  status and interaction. Turn a coherent UI feature into a story.
+
+DIAGRAM_IMAGE (for example use-case, flow, ER and sequence diagrams)
+  Identify actors, use cases, process steps, decision points and
+  system boundaries. Turn each use case, or each process step
+  performed by an actor, into a story with that actor as the role. 
+  Steps performed by the system become stories of the System. Use
+  entities and attributes from data diagrams as the fields that
+  stories name, not as stories of their own.
+
+================================================================
+3. REQUIRED ELEMENTS
+================================================================
+What the backlog as a whole must cover.
+
+- Actors: derive them from all perspectives and never use a generic
+  "User": anonymous and registered users, desktop and mobile users,
+  users with accessibility needs, administrators and editors,
+  third-party integrators, and the system itself.
+- Functional areas: cover every combination of actor and flow that
+  the artifacts support, including public content and navigation,
+  authentication and access control, the core submission or
+  transaction flows, search and filtering, notifications, content
+  management, reporting, administration and configuration,
+  integrations and import/export, automation and scheduling,
+  validation and consent.
+- Non-functional areas, where the artifacts state them:
+  accessibility, security, reliability, backup and recovery.
+- Sources: every story names at least one source artifact. If the
+  same requirement appears in several artifacts, write one story and
+  list all of its sources.
+
+================================================================
+4. QUALITY CRITERIA
+================================================================
+The criteria every story must meet, each with examples.
+
+Granularity
+One story states one distinct requirement at the level a product
+owner would write it. A form, screen or capability with several
+fields or options is one story that names them, not one story per
+field. Capabilities with different goals, for example "submit a
+nomination", "vote for a nominee" and "confirm a vote by email",
+are separate stories and are never merged into one story.
+Bad:  "enter the candidate's name", "enter the candidate's contact"
+      and "enter the description" (one nomination form split into
+      one story per field)
+Good: "submit a nomination by entering the candidate's name, contact
+      and description" (one story)
+
+Specificity
+Reproduce the concrete fields, values, ranges, statuses and
+conditions that the source states. Never flatten them and never
+invent them. Write them into the sentence itself, not in brackets,
+after dashes or as lists.
+Bad:  "As a member, I want to renew books (loan extension)."
+Good: "As a member, I want to renew a loan up to two times for 14
+      days each unless another member has requested the book, so
+      that I know how long I can keep it."
+
+Actor specificity
+Use the most specific actor from the required elements.
+Bad:  "As a user, I want to see overdue loans."
+Good: "As a librarian, I want to see the list of overdue loans with
+      the member's name and the number of days overdue, so that I
+      can contact the members concerned."
+
+Benefit specificity
+The "so that" part states the concrete value of the feature for
+this actor, not a generic phrase and not a repetition of the
+feature.
+Bad:  "As a member, I want to receive a reminder, so that the
+      system works well."
+Good: "As a member, I want to receive an email reminder three days
+      before a loan is due, so that I can return or renew the book
+      in time."
+
+Grounding
+Every element of the story can be traced to a source artifact.
+Bad:  "As a member, I want to pay fines by cryptocurrency."
+      (no artifact mentions it)
+Good: "As a librarian, I want to export the monthly loan statistics
+      to a CSV file, so that I can include them in the annual
+      report." Source: reporting requirements spreadsheet
+
+================================================================
+5. USER STORY STRUCTURE
+================================================================
+The form of every story.
+
+[Story number]
+- As: [role: the most specific actor]
+- I want: [feature: one concrete capability, written as one sentence
+  with the specifics the source states]
+- So that: [benefit: the concrete value for this actor]
+- Source: [file name of one or more artifacts, each where possible
+  with the screen, section, row or diagram element]
+
+================================================================
+6. EXAMPLES
+================================================================
+Example stories with the requirement source each was written from. Match their style and level of detail.
+
+{{examples}}
+
+[1.]
+- As: New user
+- I want: To register by entering my name, email and password
+- So that: I can access member features
+- Source: Registration wireframe
+
+[2.]
+- As: User with a visual impairment
+- I want: To increase the text size on any page in three steps: 100 %, 125 % and 150 %
+- So that: I can read the content comfortably
+- Source: Accessibility requirements
+
+[3.]
+- As: Mobile phone user
+- I want: A responsive layout with large touch-friendly tap targets
+- So that: I can use the site comfortably from my phone
+- Source: Mobile prototype
+
+[4.]
+- As: Support agent
+- I want: To change the status of a ticket to In progress, Waiting for customer or Resolved
+- So that: The customer and the other agents can see the current state of the request
+- Source: Ticket statuses spreadsheet, rows 2 to 4
+
+[5.]
+- As: Team manager
+- I want: To approve a leave request submitted by a member of my team
+- So that: The employee knows that the requested days off are granted
+- Source: Leave management use case diagram, use case "Approve leave request"
+
+[6.]
+- As: System
+- I want: To send the employee an email with the approved dates as soon as a manager approves the leave request
+- So that: The employee has a written confirmation of the approved leave
+- Source: Leave approval process diagram, step "Send confirmation". Email templates document, template 3
+
+[7.]
+- As: Customer
+- I want: To get search results from the knowledge base within two seconds while up to 500 users are searching at the same time
+- So that: I can find an answer without waiting
+- Source: Technical requirements document, section 4.2 "Performance"
+
+================================================================
+7. OUTPUT FORMAT
+================================================================
+How to produce and present the output.
+
+1. Before writing, list for yourself every distinct actor, every
+   screen, flow or process, and every distinct requirement statement
+   in the artifacts. Do not output this list.
+2. Start the output with an estimate of the number of stories:
+   minimum, expected and maximum, based on that list.
+3. Output the stories grouped under functional and non-functional
+   headings (only the headings that apply), each story in the user
+   story structure above and in the style of the examples, numbered
+   1, 2 and so on.
+4. Before the summary, check every story against the list and the
+   quality criteria.
+5. End with a summary: total number of stories, actors covered,
+   functional and non-functional areas covered, and requirements
+   that the artifacts leave unclear and that need clarification with
+   stakeholders.
+6. Write every user story in {{language}}.
+
+Attached artifacts:
+{{source_files}}
+
+Now analyse all attached artifacts and write the backlog.
